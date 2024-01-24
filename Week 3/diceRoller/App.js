@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, SafeAreaView, Pressable, Modal } from 'react-native';
-import { TextInput } from 'react-native/Libraries/Components/TextInput/TextInput';
+import { StyleSheet, Text, View, Button, SafeAreaView, Pressable, Modal, TextInput } from 'react-native';
+import { useState } from 'react'
 export default function App() {
   // Set max and min dice value
   const maxVal = 6;
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     height: 100,
     justifyContent: "center",
     borderWidth: 3,
-    borderRadius: 25
+    borderRadius: 15
   },
   diceNumber: {
     textAlign: "center",
@@ -221,11 +221,10 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   textInput: {
-    backgroundColor: "#ffd4d4",
+    backgroundColor: "#e0d4ff",
     padding: 10,
     borderWidth: 1,
     borderRadius: 6,
-    color: "#fff",
     marginBottom: 30
   },
   modalButtonContainer: {
