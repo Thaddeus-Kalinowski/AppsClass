@@ -1,7 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Button, Modal, Image, TextInput } from 'react-native';
+import { useState } from 'react';
 
 export default function App() {
+  // State management time
+  const [modalIsVisible, setModalIsVisible] = useState(false)
+  const [shoppingItems, setShoppingItems] = useState("");
+  const [enteredItemText, setEnteredItemText] = useState("");
+
+  function startAddItemHandler() {
+    setModalIsVisible(true);
+  }
+
+  function endAddItemHandler() {
+    setModalIsVisible(false);
+  }
+
+  function itemInputHandler(enteredText) {
+    setEnteredItemText(enteredText);
+  }
+
+  function addItemHandler() {
+    console.log(enteredItemText);
+    if (shoppingItems === "") {
+      setShoppingItems(enteredItemText);
+    } else {
+      setShoppingItems(shoppingItems + "\n" + enteredItemText);
+    }
+  }
+
   return (
     <>
     {/* Set status bar styling */}
@@ -15,7 +42,9 @@ export default function App() {
         </View>
         {/* Button container */}
         <View style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>Add Item</Text>
+          <Button style={styles.button} title="Add Item"
+          onPress={startAddItemHandler}
+          color="orange"/>
         </View>
         {/* Items to get title container */}
         <View style={styles.subtitleContainer}>
@@ -23,8 +52,32 @@ export default function App() {
         </View>
           {/* Set list of items container */}
         <View style={styles.listContainer}>
-          <Text style={styles.text}>List of Items Goes Here</Text>
+          <Text style={styles.text}>{shoppingItems}</Text>
         </View>
+
+
+        <Modal style={styles.appContainer} visible={modalIsVisible} animationType='slide'>
+          <SafeAreaView style={styles.inputContainer}>
+            <View>
+              <Image
+              style={styles.image}
+               source={require('./assets/ShoppingCart.png')}/>
+            
+            
+              <TextInput 
+                style={styles.textInput}
+
+                placeholder="Enter Item Here"
+              />
+
+              <View style={styles.modalButtonContainer}>
+                <Button style={styles.modalButton} title="Add Item"/>
+                <Button style={styles.modalButton} title="Cancel" onPress={endAddItemHandler}/>
+              </View>
+            </View>
+          </SafeAreaView>
+        </Modal>
+
     </SafeAreaView>
     </>
   );
@@ -54,10 +107,11 @@ const styles = StyleSheet.create({
     flex: 0.7,
     marginVertical: 30,
     paddingHorizontal: 60,
-    backgroundColor: "orange",
     justifyContent: "center"
   },
-  buttonText: {
+  button: {
+    marginVertical: 30,
+    width: 60,
     fontSize: 30,
     fontWeight: "bold",
     color: "white"
@@ -79,5 +133,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 80,
     backgroundColor: "white",
     justifyContent: "center"
+  },
+  inputContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20
+  },
+  textInput: {
+
+  },
+  modalButtonContainer: {
+    backgroundColor: "green"
+  },
+  modalButton: {
+
   }
 });
