@@ -42,7 +42,7 @@ export default function App() {
         </View>
         {/* Button container */}
         <View style={styles.buttonContainer}>
-          <Button style={styles.button} title="Add Item"
+          <Pressable style={styles.button} title="Add Item"
           onPress={startAddItemHandler}
           color="orange"/>
         </View>
