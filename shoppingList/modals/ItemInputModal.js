@@ -2,16 +2,16 @@ import { TextInput, Button, Modal, View, Image, SafeAreaView, StyleSheet } from 
 import useState from "react";
 
 function ItemInputModal(props) {
-//   const [enteredItemText, setEnteredItemText] = useState("");
+  const [enteredItemText, setEnteredItemText] = useState("");
 
-//   function itemInputHandler(enteredText) {
-//     setEnteredItemText(enteredText);
-//   }
+  function itemInputHandler(enteredText) {
+    setEnteredItemText(enteredText);
+  }
 
-//   function addItemHandler() {
-//     props.onAddItem(enteredItemText);
-//     setEnteredItemText("");
-//   }
+  function addItemHandler() {
+    props.onAddItem(enteredItemText);
+    setEnteredItemText("");
+  }
 
   return (
     <Modal
