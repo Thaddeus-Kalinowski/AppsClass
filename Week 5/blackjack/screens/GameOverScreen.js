@@ -8,8 +8,8 @@ import colors from '../constants/colors'
 function GameOverScreen(props) {
   const inset = useSafeAreaInsets();
 
-  const playerScore = 21;
-  const computerScore = 21;
+  const playerScore = props.user;
+  const computerScore = props.computer;
 
   let titleText = <Title>It's a Tie</Title>
 

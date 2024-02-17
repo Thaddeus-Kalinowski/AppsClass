@@ -64,12 +64,12 @@ export default function App() {
   let screen = <HomeScreen onNext={notesScreenHandler} />
 
   if (currentScreen === "add") {
-    screen = <AddNoteScreen onNext={homeScreenHandler} />
+    screen = <AddNoteScreen onAdd={addNoteHandler} onCancel={homeScreenHandler} />
   }
 
   if (currentScreen === "notes") {
     screen = <NotesScreen 
-                onAdd={addNoteHandler} 
+                onAdd={addNoteScreenHandler} 
                 onHome={homeScreenHandler}
                 onDelete={deleteNoteHandler}
                 currentNotes={currentNotes}

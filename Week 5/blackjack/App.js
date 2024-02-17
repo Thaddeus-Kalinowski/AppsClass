@@ -16,6 +16,8 @@ export default function App() {
   })
 
   const [currentScreen, setCurrentScreen] = useState("start");
+  const [userScore, setUserScore] = useState(0);
+  const [computerScore, setComputerScore] = useState(0);
 
   function newGameHandler() {
     setCurrentScreen("game");
@@ -29,14 +31,31 @@ export default function App() {
     setCurrentScreen("start")
   }
 
+  // Professor why
+  // function setUserScoreHandler(score) {
+  //   setUserScore(score);
+  // }
+
+  // function setComputerScoreHandler(score) {
+  //   setComputerScore(score);
+  // }
+
   let screen = <StartGameScreen onNext={newGameHandler} />
 
   if (currentScreen === "game") {
-    screen = <GameScreen onNext={gameOverHandler} />
+    screen = <GameScreen 
+              onNext={gameOverHandler}
+              onSetUserScore={setUserScore}
+              onSetComputerScore={setComputerScore}
+             />
   }
 
   if (currentScreen === "gameover") {
-    screen = <GameOverScreen onNext={restartHandler} />
+    screen = <GameOverScreen
+              onNext={restartHandler} 
+              user={userScore}
+              computer={computerScore}
+             />
   }
 
   return (
