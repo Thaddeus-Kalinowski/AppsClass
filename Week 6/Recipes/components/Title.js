@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         fontSize: 45,
         color: colors.primary300,
         textShadowRadius: 25,
-        fontFamily: "noteFont",
+        fontFamily: "blackadder",
         textAlign: "center"
     }
 });

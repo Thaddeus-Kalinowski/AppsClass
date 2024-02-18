@@ -4,7 +4,8 @@ import NavButton from "../components/NavButton";
 import colors from '../constants/colors'
 import Title from '../components/Title'
 
-function HomeScreen(props) {
+// Props: onNext
+function MainScreen(props) {
   // Set safe area screen boundaries
   const insets = useSafeAreaInsets();
 
@@ -21,24 +22,24 @@ function HomeScreen(props) {
       ]}
     >
       <View style={styles.titleContainer}>
-        <Title>Notes 2: Electric Boogaloo</Title>
+        <Title>Recipes Galore</Title>
       </View>
 
       <View style={styles.imageContainer}>
         <Image
-          source={require("../assets/images/note-taking.jpg")}
+          source={require("../assets/images/recipebook.png")}
           style={styles.image}
         />
       </View>
 
       <View style={styles.buttonContainer}>
-        <NavButton onNext={props.onNext}>Go To Notes</NavButton>
+        <NavButton onNext={props.onNext}>Go To Recipes</NavButton>
       </View>
     </View>
   );
 }
 
-export default HomeScreen;
+export default MainScreen;
 
 const styles = StyleSheet.create({
   rootContainer: {
