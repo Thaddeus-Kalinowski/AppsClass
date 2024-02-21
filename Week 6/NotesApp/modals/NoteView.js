@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     text: {
-        colors: colors.primary300,
+        color: colors.primary300,
         fontSize: 20,
         fontFamily: "paperNote"
     },
