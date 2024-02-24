@@ -1,11 +1,3 @@
-//TODO:
-// Image background on home screen
-// Linear gradient background on order review screen
-// Mockup in docs folder
-// Wait for fonts to load before 'moving on' to home screen
-// Make options reset (checkboxes reset in appearance, but not in value)
-// Fill in the radio button with the default option (idk if hes grading this part so...)
-
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -15,11 +7,19 @@ import { useMemo } from 'react';
 import colors from './constants/colors'
 import OrderReviewScreen from './screens/OrderReviewScreen';
 import { useFonts } from 'expo-font'
+import { useCallback } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     honk: require("./assets/fonts/Honk.ttf"),
   });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError])
 
   const [currentScreen, setCurrentScreen] = useState("");
   const [currentPrice, setCurrentPrice] = useState(0);
@@ -78,6 +78,14 @@ export default function App() {
     );
   }
 
+  function resetServicesHandler() {
+    setServices((prevServices) =>
+      prevServices.map(function(item) {
+          return {...item, value: false}
+      })
+    );
+  }
+
   function setNewsletterHandler() {
     setNewsletter((previous) => !previous)
   }
@@ -107,7 +115,7 @@ export default function App() {
 
   function homeScreenHandler() {
     setRepairTimeId(0);
-    //resetServicesHandler();
+    resetServicesHandler();
     setNewsletter(false);
     setRentalMembership(false);
     
@@ -141,12 +149,16 @@ export default function App() {
             />
   }
 
-  return (
-    <>
-      <StatusBar style="light" />
-      <SafeAreaProvider style={styles.container}>{screen}</SafeAreaProvider>
-    </>
-  );
+  if (!fontsLoaded && !fontError) {
+    return null
+  } else {
+    return (
+      <>
+        <StatusBar style="light" />
+        <SafeAreaProvider style={styles.container}>{screen}</SafeAreaProvider>
+      </>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

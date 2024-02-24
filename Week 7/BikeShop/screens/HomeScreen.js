@@ -1,5 +1,5 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ImageBackground } from "react-native";
 import Title from '../components/Title'
 import NavButton from '../components/NavButton'
 import colors from '../constants/colors'
@@ -13,6 +13,12 @@ function HomeScreen(props) {
     const insets = useSafeAreaInsets();
 
     return (
+      <ImageBackground
+        source={require('../assets/images/background.jpg')}
+        resizeMode="cover"
+        style={styles.rootContainer}
+        imageStyle={styles.backgroundImage}
+      >
         <View
           style={[
             styles.rootContainer,
@@ -22,19 +28,18 @@ function HomeScreen(props) {
               paddingLeft: insets.left,
               paddingRight: insets.right,
             },
-          ]}
-        >
+          ]}>
           <View style={styles.titleContainer}>
             <Title>Bikes Galore</Title>
           </View>
-    
+      
           <ScrollView style={styles.scrollContainer}>
             <View style={styles.radioContainer}>
               <Text style={styles.radioHeader}>Repair Time</Text>
               <RadioGroup
                 radioButtons={props.repairTimeRadioButtons}
                 onPress={props.onSetRepairTimeId}
-                selectedId={props.repairTimeId}
+                selectedId={props.repairTimeId.toString()}
                 layout="row"
                 containerStyle={styles.radioGroup}
                 labelStyle={styles.radioGroupLabels}
@@ -105,7 +110,8 @@ function HomeScreen(props) {
     
           </ScrollView>
         </View>
-      );
+      </ImageBackground>
+    );
 }
 
 export default HomeScreen;
@@ -113,6 +119,9 @@ export default HomeScreen;
 const styles = StyleSheet.create({
     rootContainer: {
       flex: 1,
+    },
+    backgroundImage: {
+      opacity: 0.3
     },
     titleContainer: {
       marginBottom: 10,

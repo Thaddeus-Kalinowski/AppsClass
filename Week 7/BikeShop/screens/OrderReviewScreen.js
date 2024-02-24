@@ -4,12 +4,19 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import colors from "../constants/colors";
 import NavButton from "../components/NavButton";
 import { ScrollView } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 function OrderReviewScreen(props) {
     // Set safe area insets
     const insets = useSafeAreaInsets();
 
     return (
+        <LinearGradient
+            colors={[colors.primary700, colors.accent500]}
+            style={styles.rootContainer}
+        >
+
+        
         <View
       style={[
         styles.rootContainer,
@@ -26,7 +33,7 @@ function OrderReviewScreen(props) {
                 <Title>Order Summary</Title>
             </View>
 
-            <ScrollView>
+            <ScrollView style={styles.scrollContainer}>
                 <View style={styles.subTitleContainer}>
                     <Text style={styles.subTitle}>Your order has been placed with your order details below</Text>
                 </View>
@@ -65,6 +72,7 @@ function OrderReviewScreen(props) {
             </ScrollView>
         </View>
     </View>
+    </LinearGradient>
     )
 }
 
@@ -81,7 +89,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderWidth: 2,
         borderRadius: 5,
-        borderColor: colors.primary500
+        borderColor: colors.primary500,
+    },
+    scrollContainer: {
+        height: '90%'
     },
     subTitleContainer: {
         justifyContent: 'center',
