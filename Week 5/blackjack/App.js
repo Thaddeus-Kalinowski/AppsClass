@@ -6,14 +6,21 @@ import GameOverScreen from './screens/GameOverScreen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import colors from './constants/colors'
 import { useFonts } from 'expo-font';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
 
 export default function App() {
   // Set up fonts
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     'poker': require("./assets/fonts/Poker.ttf"),
     'pokerGeneral': require("./assets/fonts/PokerKings-Regular.ttf")
   })
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError])
 
   const [currentScreen, setCurrentScreen] = useState("start");
   const [userScore, setUserScore] = useState(0);
@@ -31,7 +38,7 @@ export default function App() {
     setCurrentScreen("start")
   }
 
-  // Professor why
+  // Why would we just add the word handler
   // function setUserScoreHandler(score) {
   //   setUserScore(score);
   // }
@@ -58,14 +65,19 @@ export default function App() {
              />
   }
 
-  return (
-    <>
-      <StatusBar style="auto" />
-      <SafeAreaProvider style={styles.container}>
-        {screen}
-      </SafeAreaProvider>
-    </>
-  );
+  if (!fontsLoaded && !fontError) {
+    return null;
+  } else {
+    return (
+      <>
+        <StatusBar style="auto" />
+        <SafeAreaProvider style={styles.container}>
+          {screen}
+        </SafeAreaProvider>
+      </>
+    );
+  }
+  
 }
 
 const styles = StyleSheet.create({
