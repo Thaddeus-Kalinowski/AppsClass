@@ -4,6 +4,8 @@ import Title from '../components/Title'
 import Header from "../components/Header";
 import NavButton from '../components/NavButton'
 import colors from '../constants/colors'
+import { LinearGradient } from "expo-linear-gradient";
+
 
 function GameOverScreen(props) {
   const inset = useSafeAreaInsets();
@@ -24,36 +26,42 @@ function GameOverScreen(props) {
   }
 
   return (
-    <View
-      style={[
-        styles.rootContainer,
-        {
-          paddingTop: inset.top,
-          paddingBottom: inset.bottom,
-          paddingLeft: inset.left,
-          paddingRight: inset.right,
-        },
-      ]}
+    <LinearGradient
+      colors={[colors.accent200, colors.accent800, colors.accent200]}
+      style = {styles.rootContainer}
     >
-        
-        <View>
-            {titleText}
-        </View>
+      <View
+        style={[
+          styles.rootContainer,
+          {
+            paddingTop: inset.top,
+            paddingBottom: inset.bottom,
+            paddingLeft: inset.left,
+            paddingRight: inset.right,
+          },
+        ]}
+      >
+          
+          <View>
+              {titleText}
+          </View>
 
-        <View style={styles.scoreContainer}>
-            <Header>Computer Score:</Header>
-            <Text style={styles.scoreText}>{computerScore}</Text>
-        </View>
+          <View style={styles.scoreContainer}>
+              <Header>Computer Score:</Header>
+              <Text style={styles.scoreText}>{computerScore}</Text>
+          </View>
 
-        <View style={styles.scoreContainer}>
-            <Header>Player Score:</Header>
-            <Text style={styles.scoreText}>{playerScore}</Text>
-        </View>
+          <View style={styles.scoreContainer}>
+              <Header>Player Score:</Header>
+              <Text style={styles.scoreText}>{playerScore}</Text>
+          </View>
 
-        <View style={styles.buttonContainer}>
-            <NavButton onPress={props.onNext}>Play Now</NavButton>
-        </View>
-    </View>
+          <View style={styles.buttonContainer}>
+              <NavButton onPress={props.onNext}>Play Now</NavButton>
+          </View>
+      </View>
+    </LinearGradient>
+    
   );
 }
 

@@ -1,5 +1,5 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, ImageBackground } from "react-native";
 import Header from "../components/Header";
 import NavButton from "../components/NavButton";
 import Cards from "../constants/cards";
@@ -231,65 +231,74 @@ function GameScreen(props) {
   }, [userFinished, computerScore]);
 
   return (
-    <View
-      style={[
-        styles.rootContainer,
-        {
-          paddingTop: inset.top,
-          paddingBottom: inset.bottom,
-          paddingLeft: inset.left,
-          paddingRight: inset.right,
-        },
-      ]}
+    <ImageBackground
+      source={require('../assets/images/blackjack_felt.jpg')}
+      resize='cover'
+      style={styles.rootContainer}
+      imageStyle={styles.backgroundImage}
     >
-      <View style={styles.titleContainer}>
-        <Header>Computer's Hand</Header>
-      </View>
+      <View
+        style={[
+          styles.rootContainer,
+          {
+            paddingTop: inset.top,
+            paddingBottom: inset.bottom,
+            paddingLeft: inset.left,
+            paddingRight: inset.right,
+          },
+        ]}
+      >
+        <View style={styles.titleContainer}>
+          <Header>Computer's Hand</Header>
+        </View>
 
-      <View style={styles.computerImageContainer}>
-        <Image
-          style={styles.computerImage}
-          source={require("../assets/images/cardback1.png")}
-        />
-        <Image
-          style={styles.computerImage}
-          source={
-            computerHand.length === 0
-              ? require("../assets/images/cardback1.png")
-              : Cards[computerHand[1]].picture
-          }
-        />
-      </View>
-
-      <View style={styles.titleContainer}>
-        <Header>Player's Hand</Header>
-      </View>
-
-      <View style={styles.playerImageContainer}>
-        {userHand.map((index) => {
-          return (
+        <View style={styles.computerImageContainer}>
+          <Image
+            style={styles.computerImage}
+            source={require("../assets/images/cardback1.png")}
+          />
+          <View style={{marginLeft: -10}}>
             <Image
-              style={[styles.playerImage, { width: 100 - numUserHand * 10 }]}
-              key={index}
+              style={styles.computerImage}
               source={
-                userHand.length === 0
-                ? require("../assets/images/cardback1.png")
-                : Cards[index].picture
+                computerHand.length === 0
+                  ? require("../assets/images/cardback1.png")
+                  : Cards[computerHand[1]].picture
               }
             />
-          )
-        })}
-      </View>
+          </View>
+        </View>
 
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          <NavButton onPress={drawUserCardHandler}>Hit Me!</NavButton>
+        <View style={styles.titleContainer}>
+          <Header>Player's Hand</Header>
         </View>
-        <View style={styles.buttonContainer}>
-          <NavButton onPress={stayHandler}>Stay!</NavButton>
+
+        <View style={styles.playerImageContainer}>
+          {userHand.map((index) => {
+            return (
+              <Image
+                style={[styles.playerImage, { marginLeft: -10 * (numUserHand + 1) }]}
+                key={index}
+                source={
+                  userHand.length === 0
+                  ? require("../assets/images/cardback1.png")
+                  : Cards[index].picture
+                }
+              />
+            )
+          })}
+        </View>
+
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <NavButton onPress={drawUserCardHandler}>Hit Me!</NavButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <NavButton onPress={stayHandler}>Stay!</NavButton>
+          </View>
         </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
@@ -298,6 +307,9 @@ export default GameScreen;
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
+  },
+  backgroundImage: {
+    opacity: 0.4
   },
   titleContainer: {
     flex: 1,
@@ -318,7 +330,7 @@ const styles = StyleSheet.create({
   playerImageContainer: {
     flex: 3,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     alignItems: "center",
   },
   playerImage: {
