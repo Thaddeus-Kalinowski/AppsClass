@@ -4,8 +4,8 @@ const colors = {
     accent500: "rgb(255, 165, 0)",
     accent800: "rgb(128, 128, 128)",
     primary300: "rgb(245, 245, 220)",
-    primary500: "rgb(34, 139, 34)",
-    primary800: "rgb(139, 69, 19)"
+    primary500: "rgb(50, 170, 250)",
+    primary800: "rgb(50, 50, 180)"
 }
 
 export default colors;

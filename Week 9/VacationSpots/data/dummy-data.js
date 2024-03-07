@@ -190,7 +190,7 @@ export const DESTINATIONS = [
     "c8",
     "Oskar Schindler's Factory",
     60,
-    1999,
+    "$10",
     4.9,
     "You know, the guy from the movie Schindler's list",
     "https://i.ytimg.com/vi/GgUiJgeoRos/maxresdefault.jpg"
