@@ -1,6 +1,3 @@
-// TODO:
-// Docs layout.png
-
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback } from 'react';
