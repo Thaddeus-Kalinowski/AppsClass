@@ -25,9 +25,10 @@ export default function App() {
     }
   }, [fontsLoaded, fontError])
 
-  if (!fontsLoaded && !fontError) {
-    return null;
-  } else {
+  // if (!fontsLoaded && !fontError) {
+  //   return null;
+  // } else {
+  if (true) {
     return (
       
       <>
