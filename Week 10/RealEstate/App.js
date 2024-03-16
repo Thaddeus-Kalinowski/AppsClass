@@ -28,11 +28,9 @@ function DrawerNavigator() {
         headerStyle: {backgroundColor: colors.primary500},
         headerTintColor: "white",
         headerTitleStyle: {
-          headerTitleStyle: {
-            fontFamily: "nolluqa",
-            fontSize: 40,
-            color: colors.accent800
-          }
+          fontFamily: "nolluqa",
+          fontSize: 40,
+          color: colors.accent800
         },
         sceneContainerStyle: {backgroundColor: colors.primary300},
         drawerContentStyle: {backgroundColor: colors.primary500},
@@ -59,7 +57,7 @@ function DrawerNavigator() {
           title: "Saved Listings",
           drawerLabel: "Saved Listings",
           drawerIcon: ({color, size}) => {
-            <Entypo name="bookmark" size={size} color={color} />
+            <Entypo name="bookmarks" size={size} color={color} />
           }
         }}
       />
